@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reassingning-pod
+spec:
+  containers:
+  - image: nginx:1.19.0
+    name: app
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: backend-config
+          key: database_url
+    - name: USER
+      valueFrom:
+        configMapKeyRef:
+          name: backend-config
+          key: user
