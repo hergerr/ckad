@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotated-pod
+  annotations:
+    commit: bfisjk32
+    author: 'ty fr'
+    branch: 'tyfr/bugfix'
+spec:
+  containers:
+  - image: nginx
+    name: nginx
