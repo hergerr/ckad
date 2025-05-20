@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: testpod
+  name: testpod
+  namespace: ckad
+spec:
+  containers:
+  - args:
+    - client
+    image: nginx:1.17.10
+    name: testpod
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
