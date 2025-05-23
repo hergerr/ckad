@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: loop
+spec:
+  containers:
+  - args: ["/bin/sh", "-c", "while :; do date && sleep 1; done"]
+    image: busybox:1.36.1
+    name: loop
+    resources: {}
+  restartPolicy: Never
+status: {}
