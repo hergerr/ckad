@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: counter
+spec:
+  completions: 5
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - echo $RANDOM | base64 | head -c 20
+        image: alpine:3.17.3
+        name: counter
+        resources: {}
+      restartPolicy: Never
+status: {}

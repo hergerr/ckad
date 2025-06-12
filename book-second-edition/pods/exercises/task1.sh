@@ -14,4 +14,4 @@ kubectl logs nginx -n ckad
 kubectl remove nginx -n ckad
 kubectl run nginx --image nginx:1.17.10 --port 80 --namespace ckad --env DB_URL=postgresql://mydbL5432 --env DB_USERNAME=admin 
 # opening a shell
-kubectl exec nginx -n ckad -it -- /bin/sh
+kubectl exec nginx -n ckad -it -- /bin/sh1
