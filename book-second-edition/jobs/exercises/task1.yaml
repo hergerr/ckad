@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   creationTimestamp: null
-  name: counter
+  name: random-hash
 spec:
   completions: 5
   template:
@@ -15,7 +15,7 @@ spec:
         - -c
         - echo $RANDOM | base64 | head -c 20
         image: alpine:3.17.3
-        name: counter
+        name: random-hash
         resources: {}
       restartPolicy: Never
 status: {}

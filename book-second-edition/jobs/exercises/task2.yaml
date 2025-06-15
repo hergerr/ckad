@@ -23,4 +23,7 @@ spec:
             resources: {}
           restartPolicy: OnFailure
   schedule: '*/2 * * * *'
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 7
+  concurrencyPolicy: Forbid
 status: {}
