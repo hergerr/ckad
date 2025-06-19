@@ -1,0 +1,1 @@
+kubectl autoscale deployment nginx --min=3 --max=8 --cpu-percent=75 --dry-run=client -o=yaml | tee deployments/exercises/task2_hpa.yaml
