@@ -1,0 +1,1 @@
+kubectl logs data-exchange -c sidecar

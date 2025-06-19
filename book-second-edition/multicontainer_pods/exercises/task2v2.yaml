@@ -17,8 +17,10 @@ spec:
     volumeMounts:
     - mountPath: /var/app/data
       name: common
+  initContainers:
   - name: sidecar
     image: busybox:1.36.1
+    restartPolicy: Always
     command:
     - /bin/sh
     - -c
