@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t23
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: api-call
+  namespace: t23
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: service-role
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: service-binding
+subjects:
+- kind: ServiceAccount
+  name: api-call
+  namespace: t23
+  apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: service-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: service-list
+  name: service-list
+  namespace: t23
+spec:
+  serviceAccountName: api-call
+  containers:
+  - command:
+    - "sh"
+    - "-c"
+    - 'while true; do curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/default/services; sleep 10; echo Hi; done'
+    image: alpine/curl:3.14
+    name: service-list
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
