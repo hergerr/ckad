@@ -1,0 +1,1 @@
+# Error from server (Forbidden): error when creating "requiremes_limits_quotas/exercieses/task2_pod.yaml": pods "hello-world" is forbidden: exceeded quota: app, requested: requests.memory=900Mi, used: requests.memory=0, limited: requests.memory=500Mi
