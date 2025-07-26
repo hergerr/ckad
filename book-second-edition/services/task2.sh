@@ -1,0 +1,1 @@
+kubectl run temp --image=busybox:1.36.1 --rm --restart=Never -it -n=y72 -- wget web-app:80
