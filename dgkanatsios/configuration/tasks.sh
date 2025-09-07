@@ -18,7 +18,14 @@ kubectl create cm configmap4 --from-file=special=config4.txt
 kubectl get cm configmap4 -o yaml
 
 # Create a configMap called 'options' with the value var5=val5. Create a new nginx pod that loads the value from variable 'var5' in an env variable called 'option'
+kubectl create cm options --from-literal=var5=val5
+# task1.yaml
 
 # Create a configMap 'anotherone' with values 'var6=val6', 'var7=val7'. Load this configMap as env variables into a new nginx pod
+kubectl create cm anotherone --from-literal=var6=val6 --from-literal=var7=val7
+# task2.yaml
 
 # Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory.
+kubectl create cm cmvolume --from-literal=var8=val8 --from-literal=var9=val9
+# task3.yaml
+kubectl exec -it nginx3 -- bash
