@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: rejected
+  name: rejected
+  namespace: one
+spec:
+  containers:
+  - image: nginx
+    name: rejected
+    resources:
+      requests:
+        cpu: 2
+        memory: 3Gi
+      limits:
+        cpu: 3
+        memory: 4Gi
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

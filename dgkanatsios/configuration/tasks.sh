@@ -50,3 +50,14 @@ kubectl create ns limitrange --dry-run=client -o=yaml | tee dgkanatsios/configur
 kubectl describe ns limitrange
 
 # Create an nginx pod that requests 250Mi of memory in the limitrange namespace
+# task8.yaml
+
+# Create ResourceQuota in namespace one with hard requests cpu=1, memory=1Gi and hard limits cpu=2, memory=2Gi.
+# task9.yaml
+
+# Attempt to create a pod with resource requests cpu=2, memory=3Gi and limits cpu=3, memory=4Gi in namespace one
+# task10.yaml
+# pods "rejected" is forbidden: exceeded quota
+
+# Create a pod with resource requests cpu=0.5, memory=1Gi and limits cpu=1, memory=2Gi in namespace one
+# task11.yaml
