@@ -61,3 +61,36 @@ kubectl describe ns limitrange
 
 # Create a pod with resource requests cpu=0.5, memory=1Gi and limits cpu=1, memory=2Gi in namespace one
 # task11.yaml
+
+# Create a secret called mysecret with the values password=mypass
+kubectl create secret generic mysecret --from-literal=passwort=mypass
+
+# Create a secret called mysecret2 that gets key/value from a file
+# Create a file called username with the value admin:
+# echo -n "admin" > username
+kubectl create secret generic mysecret2 --from-file=username
+
+# Get the value of mysecret2
+kubectl get secret mysecret2 -o yaml
+echo -n YWRtaW4= | base64 -d #
+
+# Create an nginx pod that mounts the secret mysecret2 in a volume on path /etc/foo
+# task12.yaml
+
+# Delete the pod you just created and mount the variable 'username' from secret mysecret2 onto a new nginx pod in env variable called 'USERNAME'
+# task13.yaml
+
+# Create a Secret named 'ext-service-secret' in the namespace 'secret-ops'. Then, provide the key-value pair API_KEY=LmLHbYhsgWZwNifiqaRorH8T as literal.
+kubectl create ns secret-ops
+kubectl create secret generic ext-service-secret --from-literal=API_KEY=LmLHbYhsgWZwNifiqaRorH8T -n secret-ops
+
+# Consuming the Secret. Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops' and consume the Secret as an environment variable. Then, open an interactive shell to the Pod, and print all environment variables.
+# task14.yaml
+kubectl exec -n=secret-ops -it consumer -- env
+
+# Create a Secret named 'my-secret' of type 'kubernetes.io/ssh-auth' in the namespace 'secret-ops'. Define a single key named 'ssh-privatekey', and point it to the file 'id_rsa' in this directory.
+kubectl create secret generic my-secret --type=kubernetes.io/ssh-auth -n=secret-ops --from-file=ssh-privatekey=/home/tymek/Repos/ckad/id_rsa
+
+# Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path /var/app with read-only access. Open an interactive shell to the Pod, and render the contents of the file.
+# task15.yaml
+kubectl exec -n=secret-ops -it consumer -- cat /var/app/ssh-privatekey 
