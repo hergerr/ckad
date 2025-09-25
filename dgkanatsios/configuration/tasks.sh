@@ -94,3 +94,9 @@ kubectl create secret generic my-secret --type=kubernetes.io/ssh-auth -n=secret-
 # Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path /var/app with read-only access. Open an interactive shell to the Pod, and render the contents of the file.
 # task15.yaml
 kubectl exec -n=secret-ops -it consumer -- cat /var/app/ssh-privatekey 
+
+# See all the service accounts of the cluster in all namespaces
+kubectl get serviceaccounts --all-namespaces
+
+# Create a new serviceaccount called 'myuser'
+kubectl create serviceaccount myuser
