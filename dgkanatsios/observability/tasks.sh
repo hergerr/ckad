@@ -11,3 +11,20 @@ kubectl delete pod nginx  --force
 # task3.yaml
 kubectl describe nginx
 kubectl delete pod nginx  --force
+
+# Create a busybox pod that runs i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done. Check its logs
+kubectl run busybox --dry-run=client -o=yaml  --image=busybox --restart=Never -- /bin/sh -c 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done' 
+kubectl logs busybox
+
+# Create a busybox pod that runs 'ls /notexist'. Determine if there's an error (of course there is), see it. In the end, delete the pod
+kubectl run busybox --image=busybox --command -- /bin/sh -c "ls /notexist"
+kubectl logs busybox
+kubectl delete pod busybox  --force
+
+# Create a busybox pod that runs 'notexist'. Determine if there's an error (of course there is), see it. In the end, delete the pod forcefully with a 0 grace period
+kubectl run busybox --image=busybox --command -- /bin/sh -c "notexist"
+kubectl logs busybox
+kubectl delete pod busybox  --force
+
+# Get CPU/memory utilization for nodes (metrics-server must be running)
+kubectl top nodes
