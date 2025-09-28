@@ -29,3 +29,10 @@ kubectl get endpoints
 kubectl run busybox --image=busybox --restart=Never --rm -it -- wget -O- 10.104.167.189:6262
 kubectl delete deployment foo --force
 kubectl delete svc foo --force
+
+# Create an nginx deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so
+# that only pods with labels 'access: granted' can access the pods in this deployment and apply it
+kubectl create deployment nettest --image=nginx --port=80 --replicas=2 
+kubectl create service clusterip nettest --tcp=80:80
+# task2.yaml
+kubectl run busybox --image=busybox --restart=Never -l=access=granted --rm -it -- wget -T 5 -O- 10.108.241.216:80
